@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 
 gcloud run deploy iris-api \
     --image "$REGION-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE:v1" \

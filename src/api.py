@@ -14,6 +14,15 @@ class IrisFeatures(BaseModel):
     petal_length: float = Field(gt=0)
     petal_width: float = Field(gt=0)
 
+@app.get("/")
+def root():
+    return {
+        "service": "Iris ML Inference API",
+        "status": "running",
+        "docs": "/docs",
+        "health": "/health"
+    }
+
 @app.get("/health")
 def health():
     return {"status": "Okay"}

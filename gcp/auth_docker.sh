@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 
 gcloud auth configure-docker "$REGION-docker.pkg.dev"
 

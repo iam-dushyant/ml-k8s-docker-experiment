@@ -1,6 +1,6 @@
-# !/bin/bash
+#!/bin/bash
 
-gcloud artifact-registry repositories create "$REPO" \
+gcloud artifacts repositories create "$REPO" \
   --repository-format=docker \
   --location="$REGION" \
   --description="Docker repository for ML Lab"

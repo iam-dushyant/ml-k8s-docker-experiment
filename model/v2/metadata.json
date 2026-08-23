@@ -1,0 +1,9 @@
+{
+  "model_name": "iris_random_forest",
+  "version": "v2",
+  "framework": "scikit-learn",
+  "framework_version": "1.3.2",
+  "model_path": "model/v2/iris_rf.joblib",
+  "sha256": "a8e589ba034bc5e2c4e1be0085b023257212335714d65825b77a2a20b67bb9cc",
+  "test_accuracy": 0.9
+}

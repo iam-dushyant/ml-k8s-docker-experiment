@@ -45,9 +45,12 @@ jobs:
         docker build -t iris-api:${{ github.sha }} .
     
     - name: Scan Trivy for vulnerabilities
-      uses: aquasecurity/trivy-action@0.74.0
+      uses: aquasecurity/trivy-action@v0.35.0
       with:
         image-ref: iris-api:${{ github.sha }}
         format: table
         exit-code: "1"
         ignore-unfixed: true
+    - name: Build Docker image
+      run: |
+        docker build -t iris-api:ci .

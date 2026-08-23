@@ -16,24 +16,32 @@ META_PATH = MODEL_DIR / "metadata.json"
 
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
-X, y = load_iris(return_X_y=True)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+def train_model():
+    X, y = load_iris(return_X_y=True)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 
-model = RandomForestClassifier(n_estimators=100, random_state=42)
-model.fit(X_train, y_train)
-accuracy = accuracy_score(y_test, model.predict(X_test))
-joblib.dump(model, MODEL_PATH)
+    model = RandomForestClassifier(n_estimators=100, random_state=42)
+    print("Type after model creation:", type(model))
+    model.fit(X_train, y_train)
+    print("Type after model fitting:", type(model))
+    accuracy = accuracy_score(y_test, model.predict(X_test))
+    joblib.dump(model, MODEL_PATH)
 
-sha256 = hashlib.sha256(MODEL_PATH.read_bytes()).hexdigest()
-metadata = {
-    "model_name": "iris_random_forest",
-    "version": MODEL_VERSION,
-    "framework": "scikit-learn",
-    "framework_version": "1.3.2",
-    "model_path": str(MODEL_PATH),
-    "sha256": sha256,
-    "test_accuracy": round(float(accuracy), 4)
-}
+    sha256 = hashlib.sha256(MODEL_PATH.read_bytes()).hexdigest()
+    metadata = {
+        "model_name": "iris_random_forest",
+        "version": MODEL_VERSION,
+        "framework": "scikit-learn",
+        "framework_version": "1.3.2",
+        "model_path": str(MODEL_PATH),
+        "sha256": sha256,
+        "test_accuracy": round(float(accuracy), 4)
+    }
 
-META_PATH.write_text(json.dumps(metadata, indent=2))
-print(f"Model trained and saved to {MODEL_PATH}. Accuracy on test set: {accuracy:.4f}")
+    META_PATH.write_text(json.dumps(metadata, indent=2))
+    print(f"Model trained and saved to {MODEL_PATH}. Accuracy on test set: {accuracy:.4f}")
+
+    return model
+
+if __name__ == "__main__":
+    train_model()

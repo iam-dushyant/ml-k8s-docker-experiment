@@ -51,3 +51,6 @@ jobs:
         format: table
         exit-code: "1"
         ignore-unfixed: true
+    - name: Build Docker image
+      run: |
+        docker build -t iris-api:ci .

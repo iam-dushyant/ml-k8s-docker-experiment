@@ -1,0 +1,5 @@
+project_id        = "YOUR_GCP_PROJECT_ID"
+region            = "europe-west1"
+artifact_repo     = "ml-platform-v2"
+cluster_name      = "ml-platform-v2"
+model_bucket_name = "YOUR-GLOBALLY-UNIQUE-BUCKET-NAME"

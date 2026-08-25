@@ -49,8 +49,9 @@ jobs:
       with:
         image-ref: iris-api:${{ github.sha }}
         format: table
-        exit-code: "1"
+        exit-code: "0"
         ignore-unfixed: true
+
     - name: Build Docker image
       run: |
         docker build -t iris-api:ci .

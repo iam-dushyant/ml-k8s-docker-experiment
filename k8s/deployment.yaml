@@ -4,30 +4,48 @@ metadata:
   name: iris-api
 spec:
   replicas: 1
+
   selector:
     matchLabels:
       app: iris-api
+
   template:
     metadata:
       labels:
         app: iris-api
+
     spec:
       containers:
         - name: iris-api
-          image: k8s-docker-ml-dev:latest
+          image: europe-west1-docker.pkg.dev/k8s-docker-ml-dev/ml-platform-v2/iris-api:v2
           imagePullPolicy: IfNotPresent
+
+          env:
+          - name: MODEL_VERSION
+            value: "v2"
+          
           ports:
-            - containerPort: 8000
+          - name: http
+            containerPort: 8000
+
           readinessProbe:
             httpGet:
               path: /health
               port: 8000
             initialDelaySeconds: 3
             periodSeconds: 5
+          
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
           resources:
             requests:
-              memory: "128Mi"
-              cpu: "100m"
-            limits:
               memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
               cpu: "500m"
